@@ -13,11 +13,12 @@ def create_product(request):
     context = {
         'new_product' : new_product
     }
-    return render(request, 'new-product.html', context=context)
+    return render(request, 'products/new-product.html', context=context)
 
 def list_products(request):
     products = Products.objects.all()
     context = {
         'products' : products
     }
-    return render(request, 'list-products.html', context=context)
+    return render(request, 'products/list-products.html', context=context)
+
