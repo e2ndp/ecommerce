@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def saludo(request):
-    return HttpResponse('Hola desde la Views')
+def homepage(request):
+    return render(request, 'index.html', context={})
 
-def segundo_template(request):
-    return render(request, 'template-2.html', context={})
+def nosotros(request):
+    return render(request, 'nosotros.html', context={})
