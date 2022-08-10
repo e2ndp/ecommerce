@@ -1,19 +1,25 @@
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from products.models import Products
+from products.forms import CreateProducts
 
 
 def create_product(request):
-    new_product = Products.objects.create(
-        name = 'Alfajores Chocolate 12u',
-        category = 'Alfajores',
-        description = 'Alfajores "Havana" -Chocolate- 12u',
-        price = 10,
-    )
-    context = {
-        'new_product' : new_product
-    }
-    return render(request, 'products/new-product.html', context=context)
+    if request.method == 'POST':
+        form = CreateProducts(request.POST)
+        if form.is_valid():
+            Products.objects.create(
+                name = form.cleaned_data['name'],
+                category = form.cleaned_data['category'],
+                description = form.cleaned_data['description'],
+                price = form.cleaned_data['price']
+            )
+            return redirect(list_products)
+            
+    elif request.method == 'GET':
+        form = CreateProducts()
+        context = { 'form' : form }
+        return render(request, 'products/new-product.html', context=context)
 
 def list_products(request):
     products = Products.objects.all()
