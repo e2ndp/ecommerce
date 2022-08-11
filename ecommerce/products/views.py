@@ -29,6 +29,7 @@ def list_products(request):
     }
     return render(request, 'products/list-products.html', context=context)
 
+
 def search_products(request):
     search = request.GET['search']
     products = Products.objects.filter(name__icontains=search)
