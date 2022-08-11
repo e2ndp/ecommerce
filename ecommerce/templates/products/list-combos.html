@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    List Combos
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    {% for combo in combos %}
+        <div class="card" style="width: 18rem;">
+            <img src="https://t2.rg.ltmcdn.com/es/posts/4/0/3/dulce_de_leche_argentino_8304_600_square.jpg" class="card-img-top" alt="dulce-de-leche">
+            <div class="card-body">
+                <h5 class="card-title">{{combo.name}}</h5>
+                <h6>Categoria: {{combo.category}}</h6>
+                <h6>Precio: u$s {{combo.price}}</h6>
+                <p class="card-text">{{combo.description}}</p>
+                <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+        </div> 
+    {% endfor %}
+{% endblock %}
