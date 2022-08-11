@@ -21,6 +21,7 @@ def create_product(request):
         context = { 'form' : form }
         return render(request, 'products/new-product.html', context=context)
 
+
 def list_products(request):
     products = Products.objects.all()
     context = {
@@ -28,3 +29,10 @@ def list_products(request):
     }
     return render(request, 'products/list-products.html', context=context)
 
+def search_products(request):
+    search = request.GET['search']
+    products = Products.objects.filter(name__icontains=search)
+    context = {
+        'products' : products
+    }
+    return render(request, 'products/search-products.html', context=context)
