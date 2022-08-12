@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Update Product
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+
+    <!-- <h1>Producto: {{new_product.name}}</h1>
+    <h2>Categoria: {{new_product.category}}</h2>
+    <h3>Descripcion: {{new_product.description}}</h3>
+    <h3>Precio: u$s {{new_product.price}}</h3> -->
+{% endblock %}

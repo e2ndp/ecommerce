@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Delete Combo
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h1>{{combo.name}}</h1>
+    <h2>Categoria: {{combo.category}}</h2>
+    <h3>Descripcion: {{combo.description}}</h3>
+    <h3>Precio: u$s {{combo.price}}</h3>
+
+    <form action="" method="POST">
+        {% csrf_token %}    
+        <p><input type="submit" value="Borrar"></p>
+    </form>
+
+{% endblock %}

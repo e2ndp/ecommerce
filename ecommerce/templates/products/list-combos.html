@@ -13,7 +13,9 @@
                 <h6>Categoria: {{combo.category}}</h6>
                 <h6>Precio: u$s {{combo.price}}</h6>
                 <p class="card-text">{{combo.description}}</p>
-                <a href="#" class="btn btn-primary">Comprar</a>
+                {% comment %} <a href="#" class="btn btn-primary">Comprar</a> {% endcomment %}
+                <a href="/products/update-combo/{{combo.id}}/" class="btn btn-primary">Editar</a>
+                <a href="/products/delete-combo/{{combo.id}}/" class="btn btn-danger">Borrar</a>
             </div>
         </div> 
     {% endfor %}

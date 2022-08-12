@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Update Combo
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+
+    <!-- <h1>Combo: {{new_combo.name}}</h1>
+    <h2>Categoria: {{new_combo.category}}</h2>
+    <h3>Descripcion: {{new_combo.description}}</h3>
+    <h3>Precio: u$s {{new_combo.price}}</h3> -->
+{% endblock %}

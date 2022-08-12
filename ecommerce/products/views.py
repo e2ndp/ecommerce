@@ -1,3 +1,4 @@
+from itertools import product
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from products.models import Products, Combos
@@ -40,10 +41,52 @@ def search_products(request):
     }
     return render(request, 'products/search-products.html', context=context)
 
+
+def delete_product(request, pk):
+    if request.method == 'GET':
+        product = Products.objects.get(id=pk)
+        context = {
+            'product' : product
+        }
+        return render(request, 'products/delete-product.html', context=context)
+    
+    elif request.method == 'POST':
+        product = Products.objects.get(id=pk)
+        product.delete()
+        return redirect(list_products)
+    
+
+def update_product(request, pk):
+    if request.method == 'POST':
+        form = CreateProducts(request.POST)
+        if form.is_valid():
+            product = Products.objects.get(id=pk)
+            product.name = form.cleaned_data['name']
+            product.category = form.cleaned_data['category']
+            product.description = form.cleaned_data['description']
+            product.price = form.cleaned_data['price']
+            product.save()
+            
+            return redirect(list_products)
+            
+    
+    elif request.method == 'GET':
+        product = Products.objects.get(id=pk)
+        form = CreateProducts(initial={'name':product.name,
+                                       'category':product.category,
+                                       'description':product.description,
+                                       'price':product.price
+                                       })
+        context = {
+            'form' : form
+        }
+        return render(request, 'products/update-product.html', context=context)
+
+
 #   ----------
 #   | Combos |
 #   ----------
-def create_combos(request):
+def create_combo(request):
     if request.method == 'POST':
         form = CreateCombos(request.POST)
         if form.is_valid():
@@ -76,3 +119,43 @@ def search_combos(request):
         'combos' : combos
     }
     return render(request, 'products/search-combos.html', context=context)
+
+
+def update_combo(request, pk):
+    if request.method == 'POST':
+        form = CreateCombos(request.POST)
+        if form.is_valid():
+            combo = Combos.objects.get(id=pk)
+            combo.name = form.cleaned_data['name']
+            combo.category = form.cleaned_data['category']
+            combo.description = form.cleaned_data['description']
+            combo.price = form.cleaned_data['price']
+            combo.save()
+            
+            return redirect(list_combos)
+    
+    elif request.method == 'GET':
+        combo = Combos.objects.get(id=pk)
+        form = CreateCombos(initial={'name':combo.name,
+                                     'category':combo.category,
+                                     'description':combo.description,
+                                     'price':combo.price
+                                     })
+        context = {
+            'form' : form
+        }
+        return render(request, 'products/update-combo.html', context=context)
+
+
+def delete_combo(request, pk):
+    if request.method == 'GET':
+        combo = Combos.objects.get(id=pk)
+        context = {
+            'combo' : combo
+        }
+        return render(request, 'products/delete-combo.html', context=context)
+    
+    elif request.method == 'POST':
+        combo = Combos.objects.get(id=pk)
+        combo.delete()
+        return redirect(list_combos)
