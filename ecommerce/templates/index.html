@@ -7,4 +7,11 @@
 {% block contenido_que_cambia %}
     <h1>Dulce Argentina</h1>
     <img src="https://live.staticflickr.com/65535/33860045228_a845e32889.jpg" alt="dulce-argentina">
-{% endblock%}
+
+    {% if message %}
+        <h2>
+            {{message}}
+        </h2>
+    {% endif %}
+
+{% endblock %}
