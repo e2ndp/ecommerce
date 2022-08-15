@@ -33,8 +33,23 @@
                         <a class="nav-link" href="/products/list-combos/">Combos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/nosotros/">Nosotros</a>
+                        <a class="nav-link" href="/nosotros/" style="margin-right: 40rem">Nosotros</a>
                     </li>
+
+
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout/">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/register/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login/">Login</a>
+                    </li>
+                    {% endif %}
+          
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="/products/search-products/" method="GET">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
