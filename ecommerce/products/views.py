@@ -12,13 +12,14 @@ from django.contrib.auth.decorators import login_required
 def create_product(request):
     if request.users.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
-            form = CreateProducts(request.POST)
+            form = CreateProducts(request.POST, request.FILES)
             if form.is_valid():
                 Products.objects.create(
                     name = form.cleaned_data['name'],
                     category = form.cleaned_data['category'],
                     description = form.cleaned_data['description'],
-                    price = form.cleaned_data['price']
+                    price = form.cleaned_data['price'],
+                    image = form.cleaned_data('image')
                 )
                 return redirect(list_products)
                 
