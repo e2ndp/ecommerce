@@ -4,14 +4,20 @@
     Home
 {%endblock%}
 
+
+
 {% block contenido_que_cambia %}
     <h1>Dulce Argentina</h1>
     <img src="https://live.staticflickr.com/65535/33860045228_a845e32889.jpg" alt="dulce-argentina">
 
     {% if message %}
-        <h2>
+        <h2 style="color:deeppink">
             {{message}}
         </h2>
     {% endif %}
+
+    <h3 style="color:red">Importante!</h3>
+    <h4>Sin registrarse en la Página, puede ver y comprar los productos.</h4>
+    <h4>Registrándose en la Página, puede ver los Combos y Acceder a Importantes Descuentos.</h4>
 
 {% endblock %}

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 #   | Products |
 #   ------------
 def create_product(request):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
             form = CreateProducts(request.POST, request.FILES)
             if form.is_valid():
@@ -32,11 +32,27 @@ def create_product(request):
 
 
 def list_products(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        typeUser = 0    # Usuario Administrador
+    elif request.user.is_authenticated:
+        typeUser = 1    # Usuario Registrado
+    else:
+        typeUser = 2    # Usuario Sin Registrar
+    
     products = Products.objects.all()
     context = {
-        'products' : products
+        'products' : products,
+        'typeUser': typeUser
     }
     return render(request, 'products/list-products.html', context=context)
+
+
+def buy_product(request, pk):
+    product = Products.objects.get(id=pk)
+    context = {
+        'product' : product
+    }
+    return render(request, 'products/buy-product.html', context=context)
 
 
 def search_products(request):
@@ -49,7 +65,7 @@ def search_products(request):
 
 
 def delete_product(request, pk):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'GET':
             product = Products.objects.get(id=pk)
             context = {
@@ -66,7 +82,7 @@ def delete_product(request, pk):
     
 
 def update_product(request, pk):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
             form = CreateProducts(request.POST)
             if form.is_valid():
@@ -99,7 +115,7 @@ def update_product(request, pk):
 #   | Combos |
 #   ----------
 def create_combo(request):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
             form = CreateCombos(request.POST)
             if form.is_valid():
@@ -121,12 +137,26 @@ def create_combo(request):
 
 @login_required
 def list_combos(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        typeUser = 0    # Usuario Administrador
+    else:
+        typeUser = 1    # Usuario Registrado
+        
     combos = Combos.objects.all()
     context = {
-        'combos' : combos
+        'combos' : combos,
+        'typeUser' : typeUser
     }
     return render(request, 'products/list-combos.html', context=context)
 
+@login_required
+def buy_combos(request, pk):
+    combos = Combos.objects.get(id=pk)
+    context = {
+        'combos' : combos,
+        'user' : request.user
+    }
+    return render(request, 'products/buy-combo.html', context=context)
 
 @login_required
 def search_combos(request):
@@ -139,7 +169,7 @@ def search_combos(request):
 
 
 def update_combo(request, pk):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'POST':
             form = CreateCombos(request.POST)
             if form.is_valid():
@@ -168,7 +198,7 @@ def update_combo(request, pk):
 
 
 def delete_combo(request, pk):
-    if request.users.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_superuser:
         if request.method == 'GET':
             combo = Combos.objects.get(id=pk)
             context = {

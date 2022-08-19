@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Buy Combo
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h2 style="color:green">Felicidades!!!!</h2>
+    <p>Acaba de comprar el Combo: </p>  <p style="color:brown">{{combos}}</p>
+    <p>Gracias </p> <p style="color:blue">{{user}}</p> <p> por confiar en nosotros...</p>
+{% endblock %}

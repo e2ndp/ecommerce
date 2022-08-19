@@ -17,9 +17,13 @@
                 <h6>Categoria: {{product.category}}</h6>
                 <h6>Precio: u$s {{product.price}}</h6>
                 <p class="card-text">{{product.description}}</p>
-                {% comment %} <a href="#" class="btn btn-primary">Comprar</a> {% endcomment %}
-                <a href="/products/update-product/{{product.id}}/" class="btn btn-primary">Editar</a>
-                <a href="/products/delete-product/{{product.id}}/" class="btn btn-danger">Borrar</a>
+                {% if typeUser == 0 %}
+                    <a href="/products/update-product/{{product.id}}/" class="btn btn-primary">Editar</a>
+                    <a href="/products/delete-product/{{product.id}}/" class="btn btn-danger">Borrar</a>
+                {% else %}
+                    <a href="/products/buy-product/{{product.id}}/" class="btn btn-primary">Comprar</a>
+                {% endif %}
+
             </div>
         </div> 
     {% endfor %}

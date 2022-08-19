@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Buy Products
+{% endblock %}
+
+{% block contenido_que_cambia %}
+    <h2 style="color:green">Felicidades!!!!</h2>
+    <p>Acaba de comprar el Producto: </p>  <p style="color:brown">{{product}}</p>
+    <p>Gracias </p> <p style="color:blue">{{user}}</p> <p> por confiar en nosotros...</p>
+{% endblock %}
