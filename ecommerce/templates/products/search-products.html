@@ -7,7 +7,11 @@
 {% block contenido_que_cambia %}
     {% for product in products %}
         <div class="card" style="width: 18rem;">
-            <img src="https://t2.rg.ltmcdn.com/es/posts/4/0/3/dulce_de_leche_argentino_8304_600_square.jpg" class="card-img-top" alt="dulce-de-leche">
+            {% if product.image %}
+                <img src="{{product.image.url}}" class="card-img-top" alt="dulce-de-leche">
+            {% else %}
+                <img src="https://t2.rg.ltmcdn.com/es/posts/4/0/3/dulce_de_leche_argentino_8304_600_square.jpg" class="card-img-top" alt="dulce-de-leche">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{product.name}}</h5>
                 <h6>Categoria: {{product.category}}</h6>
